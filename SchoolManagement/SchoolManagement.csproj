@@ -30,7 +30,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="Dapper" Version="2.0.123" />
   </ItemGroup>
-
+	<Target Name ="FixDuplicateAnalyzers" BeforeTargets="CoreCompile">
+		<ItemGroup>
+			<FilteredAnalyzer Include="@(Analyzer->Distinct())"/>
+			<Analyzer Remove="@(Analyzer)"/>
+			<Analyzer Include="@(FilteredAnalyzer)"/>
+		</ItemGroup>
+	</Target>
 </Project>

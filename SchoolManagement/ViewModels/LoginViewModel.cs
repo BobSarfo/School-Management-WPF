@@ -1,4 +1,6 @@
-﻿using SchoolManagement.DAL.Repositories;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using SchoolManagement.DAL.Repositories;
 using SchoolManagement.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,14 +15,14 @@ using System.Windows.Input;
 
 namespace SchoolManagement.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : ObservableObject
     {
         private readonly IUserRepository _userRepository;
         public LoginViewModel()
         {
             _userRepository = new UserRepository();
-            LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            RecoverPasswordCommand = new RelayCommand(x => ExecuteRecoverPasswordCommand("", ""));
+            LoginCommand = new RelayCommand(ExecuteLoginCommand,CanExecuteLoginCommand);
+            //RecoverPasswordCommand = new DelegateCommand(x => ExecuteRecoverPasswordCommand("", ""));
         }
 
         private string? _username;
@@ -67,19 +69,23 @@ namespace SchoolManagement.ViewModels
 
 
         public ICommand LoginCommand { get; }
-        public ICommand RecoverPasswordCommand { get; }
-        public ICommand RememberUserPasswordCommand { get; }
-        public ICommand ShowPasswordCommand { get; }
+        //public ICommand RecoverPasswordCommand { get; }
+        //public ICommand RememberUserPasswordCommand { get; }
+        //public ICommand ShowPasswordCommand { get; }
 
 
-        private bool CanExecuteLoginCommand(Object obj)
+        private bool CanExecuteLoginCommand()
         {
             bool isValidData = true;
-            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 || Password == null || Password.Length < 3) isValidData = false;
+            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 || Password == null || Password.Length < 3)
+            {
+                isValidData = false;
+                ErrorMessage = "Invalid Input";
+            }
 
             return isValidData;
         }
-        private void ExecuteLoginCommand(Object obj)
+        private void ExecuteLoginCommand()
         {
             var creds = new NetworkCredential(Username, Password);
             var authenticated = _userRepository.AuthenticateUser(creds);
@@ -88,9 +94,10 @@ namespace SchoolManagement.ViewModels
                 ErrorMessage = String.Empty;
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username == null ? "" : Username), null);
-            }else ErrorMessage = "Invalid Login Details";
-            
-            // IsViewVisible = false;
+            }
+            else ErrorMessage = "Invalid Login Details";
+
+            IsViewVisible = false;
         }
 
         private void ExecuteRecoverPasswordCommand(string username, string password)

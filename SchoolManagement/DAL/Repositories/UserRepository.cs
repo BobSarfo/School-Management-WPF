@@ -62,7 +62,7 @@ namespace SchoolManagement.DAL.Repositories
 
         public UserModel Update()
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

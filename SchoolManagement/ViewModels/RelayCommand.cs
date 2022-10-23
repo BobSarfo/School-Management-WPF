@@ -7,13 +7,13 @@ using System.Windows.Input;
 
 namespace SchoolManagement.ViewModels
 {
-    public class RelayCommand : ICommand
+    public class DelegateCommand : ICommand
     {
 
         private readonly Action<object> _executionAction;
         private readonly Predicate<object> _canExecutionAction;
 
-        public RelayCommand(Action<object> executionAction, Predicate<object> canExecutionAction)
+        public DelegateCommand(Action<object> executionAction, Predicate<object> canExecutionAction)
         {
             _executionAction = executionAction;
             _canExecutionAction = canExecutionAction;
@@ -24,7 +24,7 @@ namespace SchoolManagement.ViewModels
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public RelayCommand(Action<object> executionAction)
+        public DelegateCommand(Action<object> executionAction)
         {
             _executionAction = executionAction;
             _canExecutionAction = null ;
