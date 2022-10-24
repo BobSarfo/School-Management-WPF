@@ -11,7 +11,7 @@ namespace SchoolManagement.DAL.Repositories
 {
     public class UserRepository : BaseRepository, IUserRepository
     {
-        private readonly List<UserModel> _users =new() {
+        private static List<UserModel> _users =new() {
             new UserModel {  Id = 1, Username = "admin", Password = "admin"} 
         };
 

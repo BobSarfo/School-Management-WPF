@@ -6,25 +6,23 @@
         xmlns:local="clr-namespace:SchoolManagement.Views"
         xmlns:viewModel="clr-namespace:SchoolManagement.ViewModels" xmlns:customcontrols="clr-namespace:SchoolManagement.CustomControls"
         mc:Ignorable="d"
-        Title="LoginView" Height="650" Width="600"
+        Title="LoginView" Height="550" Width="600"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
+        d:DataContext="{d:DesignInstance {x:Type local:LoginView}}"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown">
 
-    <Window.DataContext>
-        <viewModel:LoginViewModel />
-    </Window.DataContext>
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
     </Window.Resources>
 
-    <Window.Visibility>
+    <!--<Window.Visibility>
         <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
-    </Window.Visibility>
+    </Window.Visibility>-->
 
     <Border CornerRadius="50" >
 
@@ -36,6 +34,7 @@
             CornerRadius="30"
             BorderThickness="2"
         >
+            
             <Border.Background>
                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
                     <GradientStop Color="#cccc" Offset="0"/>

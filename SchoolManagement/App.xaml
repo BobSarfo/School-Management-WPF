@@ -1,10 +1,9 @@
 ﻿<Application x:Class="SchoolManagement.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SchoolManagement"
-             Startup="ApplicationStart">
+             xmlns:local="clr-namespace:SchoolManagement">
 
     <Application.Resources>
-         
+        <ResourceDictionary Source="/Styles/UIColors.xaml"/>
     </Application.Resources>
 </Application>

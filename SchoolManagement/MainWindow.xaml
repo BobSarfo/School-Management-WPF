@@ -4,9 +4,73 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SchoolManagement"
+        xmlns:viewModel="clr-namespace:SchoolManagement.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
 
-    </Grid>
+    <Border CornerRadius="50" >
+
+        <Border.Background>
+            <ImageBrush Opacity=".2"  ImageSource="/resources/images/login/login_bg.jpg" Stretch="UniformToFill" />
+        </Border.Background>
+        
+        <Border 
+            Opacity=".99"
+            CornerRadius="30"
+            BorderThickness="2"
+        >
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#cccc" Offset="0"/>
+                    <GradientStop Color="#dddd" Offset="0.5"/>
+                    <GradientStop Color="#aaaa" Offset="0.75"/>
+                    <GradientStop Color="#bbbbbb" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#333333" Offset="0"/>
+                    <GradientStop Color="#555555" Offset="0.5"/>
+                    <GradientStop Color="#222222" Offset="0.75"/>
+                    <GradientStop Color="#141414" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Navigation Menu-->
+                <Border CornerRadius="30 0 0 30" Grid.Column="0">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#333333" Offset="0"/>
+                            <GradientStop Color="#555555" Offset="0.5"/>
+                            <GradientStop Color="#222222" Offset="0.75"/>
+                            <GradientStop Color="#141414" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        
+                        
+                    </StackPanel>
+                </Border>
+
+                <!--Content Page-->
+                <Border CornerRadius="0 30 30 0" Grid.Column="1">
+                   
+                </Border>
+            </Grid>
+            
+        </Border>
+    </Border>
+
 </Window>

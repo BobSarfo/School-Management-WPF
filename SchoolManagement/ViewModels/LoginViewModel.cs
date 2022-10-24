@@ -3,12 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using SchoolManagement.DAL.Repositories;
 using SchoolManagement.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Security;
 using System.Security.Principal;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,25 +13,28 @@ namespace SchoolManagement.ViewModels
 {
     public partial class LoginViewModel : ObservableObject
     {
-        private readonly IUserRepository _userRepository;
-        public LoginViewModel()
+        public IUserRepository _userRepository;
+
+
+        public LoginViewModel(IUserRepository userRepository)
         {
-            _userRepository = new UserRepository();
+            _userRepository = userRepository;
         }
 
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
-        private string? username;
+        private string? _username;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
-        private SecureString? password;
+        private SecureString? _password;
 
         [ObservableProperty]
-        private string? errorMessage;
+        private string? _errorMessage;
 
-        private bool? IsViewVisible;
+        [ObservableProperty]
+        private bool? isViewVisible;
 
 
         private bool CanExecuteLoginCommand()
@@ -50,20 +50,30 @@ namespace SchoolManagement.ViewModels
         }
 
 
-        [RelayCommand(CanExecute = nameof(CanExecuteLoginCommand))]
-        private void Login()
-        {
-            var creds = new NetworkCredential(Username, Password);
-            var authenticated = _userRepository.AuthenticateUser(creds);
-            if (authenticated)
-            {
-                ErrorMessage = String.Empty;
-                Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(Username == null ? "" : Username), null);
-                 IsViewVisible = false;
-            }
-            else ErrorMessage = "Invalid Login Details";
 
+        [RelayCommand(CanExecute = nameof(CanExecuteLoginCommand), AllowConcurrentExecutions = false, IncludeCancelCommand = true)]
+        private Task Login(CancellationToken cancellationToken)
+        {
+            try
+            {
+                Task.CompletedTask.Wait(4000, cancellationToken);
+
+                var creds = new NetworkCredential(Username, Password);
+                var authenticated = _userRepository.AuthenticateUser(creds);
+                if (authenticated)
+                {
+                    ErrorMessage = String.Empty;
+                    Thread.CurrentPrincipal = new GenericPrincipal(
+                        new GenericIdentity(Username == null ? "" : Username), null);
+                    IsViewVisible = false;
+                }
+                else ErrorMessage = "Invalid Login Details";
+            }
+            catch (OperationCanceledException)
+            {
+                ErrorMessage = "An Error Occurred";
+            }
+            return Task.CompletedTask;
         }
 
     }

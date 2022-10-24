@@ -1,43 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<StartupObject>SchoolManagement.App</StartupObject>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="resources\images\login\pass.png" />
-    <None Remove="resources\images\login\user.png" />
-    <None Remove="resources\images\login_bg.jpg" />
-    <None Remove="resources\images\logo.png" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="resources\images\login\login_bg.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\images\login\logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\images\login\pass.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="resources\images\login\user.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<ApplicationDefinition Remove="App.xaml"/>
+		<Page Include="App.xaml"/>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Remove="resources\images\login\pass.png" />
+		<None Remove="resources\images\login\user.png" />
+		<None Remove="resources\images\login_bg.jpg" />
+		<None Remove="resources\images\logo.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
-    <PackageReference Include="Dapper" Version="2.0.123" />
-  </ItemGroup>
-	<Target Name ="FixDuplicateAnalyzers" BeforeTargets="CoreCompile">
+	<ItemGroup>
+		<Content Include="resources\images\login\login_bg.jpg">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="resources\images\login\logo.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="resources\images\login\pass.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="resources\images\login\user.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+		<PackageReference Include="Dapper" Version="2.0.123" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+	</ItemGroup>
+	<Target Name="FixDuplicateAnalyzers" BeforeTargets="CoreCompile">
 		<ItemGroup>
-			<FilteredAnalyzer Include="@(Analyzer->Distinct())"/>
-			<Analyzer Remove="@(Analyzer)"/>
-			<Analyzer Include="@(FilteredAnalyzer)"/>
+			<FilteredAnalyzer Include="@(Analyzer-&gt;Distinct())" />
+			<Analyzer Remove="@(Analyzer)" />
+			<Analyzer Include="@(FilteredAnalyzer)" />
 		</ItemGroup>
 	</Target>
 </Project>
