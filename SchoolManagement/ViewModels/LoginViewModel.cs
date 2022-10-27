@@ -34,7 +34,7 @@ namespace SchoolManagement.ViewModels
         private string? _errorMessage;
 
         [ObservableProperty]
-        private bool? isViewVisible;
+        private bool? isViewVisible = true;
 
 
         private bool CanExecuteLoginCommand()
@@ -51,7 +51,7 @@ namespace SchoolManagement.ViewModels
 
 
 
-        [RelayCommand(CanExecute = nameof(CanExecuteLoginCommand), AllowConcurrentExecutions = false, IncludeCancelCommand = true)]
+        [RelayCommand(CanExecute = nameof(CanExecuteLoginCommand))]
         private Task Login(CancellationToken cancellationToken)
         {
             try
@@ -65,7 +65,7 @@ namespace SchoolManagement.ViewModels
                     ErrorMessage = String.Empty;
                     Thread.CurrentPrincipal = new GenericPrincipal(
                         new GenericIdentity(Username == null ? "" : Username), null);
-                    IsViewVisible = false;
+                    this.IsViewVisible = false;
                 }
                 else ErrorMessage = "Invalid Login Details";
             }

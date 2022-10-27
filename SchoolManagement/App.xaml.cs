@@ -33,17 +33,17 @@ namespace SchoolManagement
             var loginViewModel = host.Services.GetRequiredService<LoginViewModel>();
 
             loginView.DataContext = loginViewModel;
-            //app.MainWindow = loginView;
+            app.MainWindow = loginView;
             loginView.Show();
-            //loginView.IsVisibleChanged += (s, ev) =>
-            //{
-            //    if (!loginView.IsVisible && loginView.IsLoaded)
-            //    {
-            //        loginView.Close();
-            //        //app.MainWindow = mainWindow;
-            //        mainWindow.Show();
-            //    }
-            //};
+            loginView.IsVisibleChanged += (s, ev) =>
+            {
+                if (!loginView.IsVisible && loginView.IsLoaded)
+                {
+                    loginView.Close();
+                    app.MainWindow = mainWindow;
+                    mainWindow.Show();
+                }
+            };
 
             app.Run();
 

@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:SchoolManagement">
 
     <Application.Resources>
-        <ResourceDictionary Source="/Styles/UIColors.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/UIColors.xaml"/>
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
+    
+    
 </Application>
