@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 
 namespace SchoolManagement
 {
@@ -23,6 +25,21 @@ namespace SchoolManagement
         public MainWindow()
         {
             InitializeComponent();
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+        }
+
+        private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+            WindowInteropHelper helper = new (this);
+            SendMessage(helper.Handle, 161, 2, 0);
+        }
+
+        [DllImport("user32.dll")]
+        public static extern bool SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        private void pnlControlBar_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
     }
 }

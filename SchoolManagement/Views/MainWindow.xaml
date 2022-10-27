@@ -19,7 +19,7 @@
     <Border CornerRadius="30" >
 
         <Border.Background>
-            <ImageBrush Opacity=".4"  ImageSource="/resources/images/login/login_bg.jpg" Stretch="UniformToFill" />
+            <ImageBrush Opacity=".8"  ImageSource="/resources/images/login/login_bg.jpg" Stretch="UniformToFill" />
         </Border.Background>
 
         <Border 
@@ -94,13 +94,52 @@
                                 <TextBlock Text="Teachers" Style="{StaticResource menuButtonText}" />
                             </StackPanel>
                         </RadioButton>
+                        <RadioButton  Style="{StaticResource menuButton}"  Tag="{StaticResource gray-200}" >
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome  Icon="Home" Style="{StaticResource MenuButtonIcon}"/>
+                                <TextBlock Text="Classrooms" Style="{StaticResource menuButtonText}" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton  Style="{StaticResource menuButton}"  Tag="{StaticResource gray-200}" >
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome  Icon="Home" Style="{StaticResource MenuButtonIcon}"/>
+                                <TextBlock Text="Exams" Style="{StaticResource menuButtonText}" />
+                            </StackPanel>
+                        </RadioButton>
+
 
                     </StackPanel>
                 </Border>
 
                 <!--Content Page-->
                 <Border CornerRadius="0 30 30 0" Grid.Column="1">
-
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                            <GradientStop Color="#cccc" Offset="0"/>
+                            <GradientStop Color="#dddd" Offset="0.5"/>
+                            <GradientStop Color="#aaaa" Offset="0.75"/>
+                            <GradientStop Color="#bbbbbb" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="25" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel x:Name="pnlControlBar"
+                                    Grid.Row="0"
+                                    Orientation="Horizontal"
+                                    FlowDirection="RightToLeft"
+                                    Background="Transparent"
+                                    Margin="0 0 5 0"
+                                    MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                                    MouseEnter="pnlControlBar_MouseEnter">
+                            
+                            
+                        </StackPanel>
+                    </Grid>
                 </Border>
             </Grid>
 
