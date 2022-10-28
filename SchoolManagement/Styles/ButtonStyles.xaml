@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:fa="http://schemas.fontawesome.io/icons/">
 
+    <!--Menu Button-->
     <Style x:Key="menuButton" TargetType="RadioButton">
         <Setter Property="Height" Value="50"/>
         <Setter Property="Margin" Value="-5 0 0 5" />
@@ -38,7 +39,23 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="MenuButtonIcon" TargetType="fa:ImageAwesome">
+        <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="35 0 20 0"/>
+    </Style>
 
+    <Style x:Key="menuButtonText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
+        <Setter Property="FontFamily" Value="Montserrat" />
+        <Setter Property="FontSize" Value="13.5" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+
+<!--Control Buttons-->
     <Style x:Key="ControlButton" TargetType="Button">
         <Setter Property="Height" Value="20"/>
         <Setter Property="Width" Value="20"/> 
@@ -73,19 +90,42 @@
         <Setter Property="Height" Value="10"/>
     </Style>
     
-    <Style x:Key="MenuButtonIcon" TargetType="fa:ImageAwesome">
-        <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
-        <Setter Property="Width" Value="20"/>
+
+
+
+<!--ControlBar-->
+
+    <Style x:Key="ControlBarButton" TargetType="Button">
         <Setter Property="Height" Value="20"/>
-        <Setter Property="Margin" Value="35 0 20 0"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Margin" Value="0 0 2 0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource gray-600}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate  TargetType="Button">
+                    <Border
+                        Background= "{TemplateBinding Background}"
+                        >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{Binding Path=Tag, RelativeSource={RelativeSource self}}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
-    <Style x:Key="menuButtonText" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}"/>
-        <Setter Property="FontFamily" Value="Montserrat" />
-        <Setter Property="FontSize" Value="13.5" />
-        <Setter Property="FontWeight" Value="Medium" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+
+    <Style x:Key="ControlBarButtonIcon" TargetType="fa:ImageAwesome">
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
+        <Setter Property="Width" Value="15"/>
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
 </ResourceDictionary>

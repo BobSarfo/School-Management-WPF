@@ -31,20 +31,21 @@ namespace SchoolManagement
             var mainWindow = host.Services.GetRequiredService<MainWindow>();
 
             var loginViewModel = host.Services.GetRequiredService<LoginViewModel>();
-            app.MainWindow = mainWindow;
-            //loginView.DataContext = loginViewModel;
-            mainWindow.Show();
-            //app.MainWindow = loginView;
-            //loginView.Show();
-            //loginView.IsVisibleChanged += (s, ev) =>
-            //{
-            //    if (!loginView.IsVisible && loginView.IsLoaded)
-            //    {
-            //        loginView.Close();
-            //        app.MainWindow = mainWindow;
-            //        mainWindow.Show();
-            //    }
-            //};
+            //app.MainWindow = mainWindow;
+            //mainWindow.Show();
+            
+            loginView.DataContext = loginViewModel;
+            app.MainWindow = loginView;
+            loginView.Show();
+            loginView.IsVisibleChanged += (s, ev) =>
+            {
+                if (!loginView.IsVisible && loginView.IsLoaded)
+                {
+                    loginView.Close();
+                    app.MainWindow = mainWindow;
+                    mainWindow.Show();
+                }
+            };
 
             app.Run();
 
