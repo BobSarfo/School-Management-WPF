@@ -5,6 +5,7 @@ using SchoolManagement.Interfaces;
 using SchoolManagement.ViewModels;
 using SchoolManagement.Views;
 using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -31,9 +32,7 @@ namespace SchoolManagement
             var mainWindow = host.Services.GetRequiredService<MainWindow>();
 
             var loginViewModel = host.Services.GetRequiredService<LoginViewModel>();
-            //app.MainWindow = mainWindow;
-            //mainWindow.Show();
-            
+    
             loginView.DataContext = loginViewModel;
             app.MainWindow = loginView;
             loginView.Show();
@@ -55,7 +54,8 @@ namespace SchoolManagement
 
             Host.CreateDefaultBuilder(args).ConfigureServices((hostContext, services) =>
             {
-                var a = string.Empty;
+                var readFromConfig = ConfigurationManager.AppSettings.Get("financeKey");
+                var readDbonfig = ConfigurationManager.ConnectionStrings["default"].CurrentConfiguration;
                 services.AddSingleton<LoginView>();
                 services.AddSingleton<LoginViewModel>();
                 services.AddSingleton<MainWindow>();

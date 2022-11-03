@@ -4,8 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SchoolManagement"
-        xmlns:viewModel="clr-namespace:SchoolManagement.ViewModels" xmlns:local1="clr-namespace:SchoolManagement.Views"
+        xmlns:viewModel="clr-namespace:SchoolManagement.ViewModels"
+        xmlns:local="clr-namespace:SchoolManagement.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1300"
         WindowStyle="None"
@@ -17,10 +17,10 @@
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
-            <local1:HomeView/>
+            <local:HomeView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:StudentsViewModel}">
-            <local1:StudentsView/>
+            <local:StudentsView/>
         </DataTemplate>
 
     </Window.Resources>
